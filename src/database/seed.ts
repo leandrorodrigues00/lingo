@@ -32,8 +32,8 @@ const main = async () => {
       {
         id: 1,
         courseId: 1, // Spanish
-        title: "Learn the basics of Spanish",
-        description: "Unit 1",
+        title: "Unit 1",
+        description: "Learn the basics of Spanish",
         order: 1,
       },
     ]);
@@ -44,6 +44,31 @@ const main = async () => {
         unitId: 1, // Unit 1 (Learn the basics of Spanish)
         order: 1,
         title: "Nouns",
+      },
+      {
+        id: 2,
+        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        order: 2,
+        title: "Verbs",
+      },
+      {
+        id: 3,
+        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        order: 3,
+        title: "Verbs",
+      },
+      {
+        id: 4,
+        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        order: 4,
+        title: "Verbs",
+      },
+
+      {
+        id: 5,
+        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        order: 5,
+        title: "Verbs",
       },
     ]);
 

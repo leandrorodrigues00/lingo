@@ -9,7 +9,7 @@
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
     "^(swiper/(.*)$)|^(swiper$)",
-    "^(react-use/(.*)$)|^(react-use$)",
+    "^(react-c/(.*)$)|^(react-c$)",
     "<THIRD_PARTY_MODULES>",
     "",
     "^types$",

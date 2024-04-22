@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getUnits, getUserProgress } from "@/database/queries";
 import { FeedHeader } from "@/components/feed-header";
 import { FeedWrapper } from "@/components/feed-wrapper";
+import { LessonUnit } from "@/components/lesson-unit";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { UserProgress } from "@/components/user-progress";
 
@@ -35,7 +36,15 @@ export default async function LearnPage() {
         {units.map((unit) => {
           return (
             <div key={unit.id} className="mb-10">
-              {JSON.stringify(unit)}
+              <LessonUnit
+                id={unit.id}
+                order={unit.order}
+                description={unit.description}
+                title={unit.title}
+                lessons={unit.lessons}
+                activeLesson={undefined}
+                activeLessonPercentage={0}
+              />
             </div>
           );
         })}
