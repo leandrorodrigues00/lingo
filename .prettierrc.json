@@ -8,8 +8,8 @@
   "importOrder": [
     "^(react/(.*)$)|^(react$)",
     "^(next/(.*)$)|^(next$)",
+    "^(react-(.*)$)|^(react-)",
     "^(swiper/(.*)$)|^(swiper$)",
-    "^(react-c/(.*)$)|^(react-c$)",
     "<THIRD_PARTY_MODULES>",
     "",
     "^types$",
