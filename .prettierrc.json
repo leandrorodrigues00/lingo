@@ -20,6 +20,7 @@
     "^@/lib/(.*)$",
     "^@/utils/(.*)$",
     "^@/hooks/(.*)$",
+    "^@/store/(.*)$",
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/styles/(.*)$",
