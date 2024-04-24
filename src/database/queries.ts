@@ -145,12 +145,12 @@ export const getLesson = cache(async (id?: number) => {
   }
 
   const courseProgress = await getCourseProgress();
-
   const lessonId = id || courseProgress?.activeLessonId;
 
   if (!lessonId) {
     return null;
   }
+
   const data = await db.query.lessons.findFirst({
     where: eq(lessons.id, lessonId),
     with: {

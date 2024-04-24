@@ -3,6 +3,8 @@
 import { useState } from "react";
 
 import { challengeOptions, challenges } from "@/database/schema";
+import { Challenge } from "@/components/challenge";
+import { QuestionBubble } from "@/components/question-bubble";
 import { QuizHeader } from "@/components/quiz-header";
 
 export interface QuizProps {
@@ -33,12 +35,13 @@ export function Quiz({
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
 
-  const challenge = challenges[activeIndex];
+  const currentChallenge = challenges[activeIndex];
+  const options = currentChallenge.challengeOptions ?? [];
 
   const title =
-    challenge.type === "ASSIST"
+    currentChallenge.type === "ASSIST"
       ? "Select the correct meaning"
-      : challenge.question;
+      : currentChallenge.question;
 
   return (
     <>
@@ -53,7 +56,19 @@ export function Quiz({
             <h1 className="text-center text-lg font-bold text-neutral-700 lg:text-start lg:text-3xl">
               {title}
             </h1>
-            <div></div>
+            <div>
+              {currentChallenge.type === "ASSIST" && (
+                <QuestionBubble question={currentChallenge.question} />
+              )}
+              <Challenge
+                options={options}
+                onSelect={() => {}}
+                status="none"
+                selectedOption={undefined}
+                disabled={false}
+                type={currentChallenge.type}
+              />
+            </div>
           </div>
         </div>
       </div>

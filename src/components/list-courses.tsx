@@ -4,7 +4,7 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { courses, userProgress } from "@/database/schema";
-import { CourseCard } from "@/components/Course-card";
+import { CourseCard } from "@/components/course-card";
 import { upsertUserProgress } from "@/app/_actions";
 
 import { toast } from "sonner";
