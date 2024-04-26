@@ -45,7 +45,7 @@ export function ChallengeCard({
     <div
       onClick={handleClick}
       className={cn(
-        "h-full cursor-pointer rounded-xl border-2 border-b-4 p-4 hover:bg-black/5 active:border-b-2 lg:p-6",
+        "h-full cursor-pointer rounded-xl border-2 border-b-4 p-4 hover:bg-black/5 active:mt-0.5 active:border-b-2 lg:p-6",
         selected && "border-sky-300 bg-sky-100 hover:bg-sky-100",
         selected &&
           status === "correct" &&

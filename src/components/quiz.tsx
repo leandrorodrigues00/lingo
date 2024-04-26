@@ -35,17 +35,47 @@ export function Quiz({
     );
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
-
   const [selectedOption, setSelectedOption] = useState<number>();
   const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
 
   const currentChallenge = challenges[activeIndex];
   const options = currentChallenge.challengeOptions ?? [];
 
+  const onNext = () => {
+    setActiveIndex((current) => current + 1);
+  };
+
   const onSelect = (id: number) => {
     if (status !== "none") return;
 
     setSelectedOption(id);
+  };
+
+  const onContinue = () => {
+    if (!selectedOption) return;
+
+    if (status === "wrong") {
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    if (status === "correct") {
+      onNext();
+      setStatus("none");
+      setSelectedOption(undefined);
+      return;
+    }
+
+    const correctOption = options.find((option) => option.correct);
+
+    if (!correctOption) return;
+
+    if (correctOption && correctOption.id === selectedOption) {
+      console.log("Correct option!");
+    } else {
+      console.error("Incorrect option!");
+    }
   };
 
   const title =
@@ -86,7 +116,7 @@ export function Quiz({
       <QuizFooter
         disabled={!selectedOption}
         status={status}
-        onCheck={() => {}}
+        onCheck={onContinue}
       />
     </>
   );
