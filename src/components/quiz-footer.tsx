@@ -1,5 +1,5 @@
 import { useKey, useMedia } from "react-use";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, CircleX } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,7 @@ export function QuizFooter({
 
         {status === "wrong" && (
           <div className="flex items-center text-base font-bold text-rose-500 lg:text-2xl">
-            <CheckCircle className="mr-4 h-6 w-6 lg:h-10 lg:w-10" />
+            <CircleX className="mr-4 h-6 w-6 lg:h-10 lg:w-10" />
             Try again.
           </div>
         )}

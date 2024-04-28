@@ -10,6 +10,7 @@
     "^(next/(.*)$)|^(next$)",
     "^(react-(.*)$)|^(react-)",
     "^(swiper/(.*)$)|^(swiper$)",
+    "^(sonner/(.*)$)|^(sonner$)",
     "<THIRD_PARTY_MODULES>",
     "",
     "^types$",
