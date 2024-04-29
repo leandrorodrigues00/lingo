@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Confetti from "react-confetti";
+import { useAudio, useWindowSize } from "react-use";
 import { toast } from "sonner";
 
 import { challengeOptions, challenges } from "@/database/schema";
@@ -8,6 +12,7 @@ import { Challenge } from "@/components/challenge";
 import { QuestionBubble } from "@/components/question-bubble";
 import { QuizFooter } from "@/components/quiz-footer";
 import { QuizHeader } from "@/components/quiz-header";
+import { ResultCard } from "@/components/result-card";
 import { reduceHearts, upsertChallengeProgress } from "@/app/_actions";
 
 export interface QuizProps {
@@ -28,22 +33,35 @@ export function Quiz({
   initialLessonChallenges,
   userSubscription,
 }: QuizProps) {
-  const [pending, startTransition] = useTransition();
+  const { height, width } = useWindowSize();
+  const router = useRouter();
 
+  const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(initialPercentage);
   const [challenges] = useState(initialLessonChallenges);
+  const [selectedOption, setSelectedOption] = useState<number>();
+  const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
+  const [pending, startTransition] = useTransition();
   const [activeIndex, setActiveIndex] = useState(() => {
     const uncompletedIndex = challenges.findIndex(
       (challenge) => !challenge.completed,
     );
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
-  const [selectedOption, setSelectedOption] = useState<number>();
-  const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
+
+  const [finishAudio] = useAudio({ src: "./sound/finish.mp3", autoPlay: true });
+
+  const [correctAudio, _c, correctControls] = useAudio({
+    src: "./sound/correct.wav",
+  });
+
+  const [incorrectAudio, _i, incorrectControls] = useAudio({
+    src: "./sound/incorrect.wav",
+  });
 
   const currentChallenge = challenges[activeIndex];
-  const options = currentChallenge.challengeOptions ?? [];
+  const options = currentChallenge?.challengeOptions ?? [];
 
   const onNext = () => {
     setActiveIndex((current) => current + 1);
@@ -83,7 +101,7 @@ export function Quiz({
               console.error("Missing hearts");
               return;
             }
-
+            correctControls.play();
             setStatus("correct");
             setPercentage((prev) => prev + 100 / challenges.length);
 
@@ -102,7 +120,7 @@ export function Quiz({
               console.error("Missing Hearts");
               return;
             }
-
+            incorrectControls.play();
             setStatus("wrong");
 
             if (!response?.error) {
@@ -114,6 +132,44 @@ export function Quiz({
     }
   };
 
+  if (!currentChallenge) {
+    return (
+      <>
+        {finishAudio}
+        <Confetti
+          width={width}
+          height={height}
+          recycle={false}
+          numberOfPieces={500}
+          tweenDuration={10000}
+        />
+        <div className="mx-auto flex h-full max-w-lg flex-col items-center justify-center gap-y-4 text-center lg:gap-y-8">
+          <Image
+            src="./icons/finish.svg"
+            alt="Finish"
+            className="hidden lg:block"
+            height={100}
+            width={100}
+          />
+          <h1 className="text-xl font-bold text-neutral-700 lg:text-3xl">
+            Great job! <br />
+            You&apos;ve completed the lesson.
+          </h1>
+          <div className="flex w-full items-center gap-x-4">
+            <ResultCard variant="points" value={challenges.length * 10} />
+            <ResultCard variant="hearts" value={hearts} />
+          </div>
+        </div>
+
+        <QuizFooter
+          lessonId={lessonId}
+          status="completed"
+          onCheck={() => router.push("/learn")}
+        />
+      </>
+    );
+  }
+
   const title =
     currentChallenge.type === "ASSIST"
       ? "Select the correct meaning"
@@ -121,6 +177,8 @@ export function Quiz({
 
   return (
     <>
+      {incorrectAudio}
+      {correctAudio}
       <QuizHeader
         hearts={hearts}
         percentage={percentage}

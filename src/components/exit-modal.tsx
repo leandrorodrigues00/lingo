@@ -29,7 +29,7 @@ export function ExitModal() {
         <DialogHeader>
           <div className="mb-5 flex w-full items-center justify-center">
             <Image
-              src="/icons/mascot_sad.svg"
+              src="./icons/mascot_sad.svg"
               alt="Mascot"
               height={80}
               width={80}

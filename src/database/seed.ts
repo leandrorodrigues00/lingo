@@ -8,7 +8,6 @@ import * as schema from "@/database/schema";
 const sql = neon(process.env.DATABASE_URL!);
 
 const db = drizzle(sql, { schema });
-
 const main = async () => {
   try {
     console.log("Seeding database");
@@ -22,10 +21,26 @@ const main = async () => {
     await db.delete(schema.challengeProgress);
 
     await db.insert(schema.courses).values([
-      { id: 1, title: "Spanish", imageSrc: "./icons/es.svg" },
-      { id: 2, title: "Italian", imageSrc: "./icons/it.svg" },
-      { id: 3, title: "French", imageSrc: "./icons/fr.svg" },
-      { id: 4, title: "Croatian", imageSrc: "./icons/hr.svg" },
+      {
+        id: 1,
+        title: "Spanish",
+        imageSrc: "./icons/es.svg",
+      },
+      {
+        id: 2,
+        title: "Italian",
+        imageSrc: "./icons/it.svg",
+      },
+      {
+        id: 3,
+        title: "French",
+        imageSrc: "./icons/fr.svg",
+      },
+      {
+        id: 4,
+        title: "Croatian",
+        imageSrc: "./icons/hr.svg",
+      },
     ]);
 
     await db.insert(schema.units).values([
@@ -41,32 +56,31 @@ const main = async () => {
     await db.insert(schema.lessons).values([
       {
         id: 1,
-        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        unitId: 1, // Unit 1 (Learn the basics...)
         order: 1,
         title: "Nouns",
       },
       {
         id: 2,
-        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        unitId: 1, // Unit 1 (Learn the basics...)
         order: 2,
         title: "Verbs",
       },
       {
         id: 3,
-        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        unitId: 1, // Unit 1 (Learn the basics...)
         order: 3,
         title: "Verbs",
       },
       {
         id: 4,
-        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        unitId: 1, // Unit 1 (Learn the basics...)
         order: 4,
         title: "Verbs",
       },
-
       {
         id: 5,
-        unitId: 1, // Unit 1 (Learn the basics of Spanish)
+        unitId: 1, // Unit 1 (Learn the basics...)
         order: 5,
         title: "Verbs",
       },
@@ -78,46 +92,45 @@ const main = async () => {
         lessonId: 1, // Nouns
         type: "SELECT",
         order: 1,
-        question: 'Which one of these is "the man"?',
+        question: 'Which one of these is the "the man"?',
       },
       {
         id: 2,
-        lessonId: 1,
+        lessonId: 1, // Nouns
         type: "ASSIST",
         order: 2,
         question: '"the man"',
       },
-
       {
         id: 3,
-        lessonId: 1,
+        lessonId: 1, // Nouns
         type: "SELECT",
         order: 3,
-        question: 'Which one of these is "the robot"?',
+        question: 'Which one of these is the "the robot"?',
       },
     ]);
 
     await db.insert(schema.challengeOptions).values([
       {
-        challengeId: 1, // which one of theses is "the man"?
+        challengeId: 1, // Which one of these is "the man"?
+        imageSrc: "./icons/man.svg",
         correct: true,
-        imageSrc: "/icons/man.svg",
         text: "el hombre",
-        audioSrc: "/sound/es_man.mp3",
+        audioSrc: "./sound/es_man.mp3",
       },
       {
-        challengeId: 1, // which one of theses is "the man"?
+        challengeId: 1,
+        imageSrc: "./icons/woman.svg",
         correct: false,
-        imageSrc: "/icons/woman.svg",
         text: "la mujer",
-        audioSrc: "/sound/es_woman.mp3",
+        audioSrc: "./sound/es_woman.mp3",
       },
       {
-        challengeId: 1, // which one of theses is "the man"?
+        challengeId: 1,
+        imageSrc: "./icons/robot.svg",
         correct: false,
-        imageSrc: "/icons/robot.svg",
         text: "el robot",
-        audioSrc: "/sound/es_robot.mp3",
+        audioSrc: "./sound/es_robot.mp3",
       },
     ]);
 
@@ -126,43 +139,69 @@ const main = async () => {
         challengeId: 2, // "the man"?
         correct: true,
         text: "el hombre",
-        audioSrc: "/sound/es_man.mp3",
+        audioSrc: "./sound/es_man.mp3",
       },
       {
-        challengeId: 2, // "the man"?
+        challengeId: 2,
         correct: false,
         text: "la mujer",
-        audioSrc: "/sound/es_woman.mp3",
+        audioSrc: "./sound/es_woman.mp3",
       },
       {
-        challengeId: 2, // "the man"?
+        challengeId: 2,
         correct: false,
         text: "el robot",
-        audioSrc: "/sound/es_robot.mp3",
+        audioSrc: "./sound/es_robot.mp3",
       },
     ]);
 
     await db.insert(schema.challengeOptions).values([
       {
-        challengeId: 3, // Which one of these is "the robot"?
+        challengeId: 3, // Which one of these is the "the robot"?
+        imageSrc: "./icons/man.svg",
         correct: false,
         text: "el hombre",
-        audioSrc: "/sound/es_man.mp3",
+        audioSrc: "./sound/es_man.mp3",
       },
       {
-        challengeId: 3, // Which one of these is "the robot"?
+        challengeId: 3,
+        imageSrc: "./icons/woman.svg",
         correct: false,
         text: "la mujer",
-        audioSrc: "/sound/es_woman.mp3",
+        audioSrc: "./sound/es_woman.mp3",
       },
       {
-        challengeId: 3, // Which one of these is "the robot"?
+        challengeId: 3,
+        imageSrc: "./icons/robot.svg",
         correct: true,
         text: "el robot",
-        audioSrc: "/sound/es_robot.mp3",
+        audioSrc: "./sound/es_robot.mp3",
       },
     ]);
 
+    await db.insert(schema.challenges).values([
+      {
+        id: 4,
+        lessonId: 2, // Verbs
+        type: "SELECT",
+        order: 1,
+        question: 'Which one of these is the "the man"?',
+      },
+      {
+        id: 5,
+        lessonId: 2, // Verbs
+        type: "ASSIST",
+        order: 2,
+        question: '"the man"',
+      },
+      {
+        id: 6,
+        lessonId: 2, // Verbs
+        type: "SELECT",
+        order: 3,
+        question: 'Which one of these is the "the robot"?',
+      },
+    ]);
     console.log("Seeding finished");
   } catch (error) {
     console.error(error);

@@ -28,18 +28,18 @@ export function Sidebar({ className }: SidebarProps) {
       </Link>
 
       <div className="flex flex-1 flex-col gap-y-2">
-        <SidebarItem iconSrc="/icons/learn.svg" label="Learn" href="/learn" />
+        <SidebarItem iconSrc="./icons/learn.svg" label="Learn" href="/learn" />
         <SidebarItem
-          iconSrc="/icons/leaderboard.svg"
+          iconSrc="./icons/leaderboard.svg"
           label="Leaderboard"
           href="/leaderboard"
         />
         <SidebarItem
-          iconSrc="/icons/quests.svg"
+          iconSrc="./icons/quests.svg"
           label="Quests"
           href="/quests"
         />
-        <SidebarItem iconSrc="/icons/shop.svg" label="Shop" href="/shop" />
+        <SidebarItem iconSrc="./icons/shop.svg" label="Shop" href="/shop" />
       </div>
 
       <div className="p-4">
