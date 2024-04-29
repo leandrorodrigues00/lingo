@@ -1,7 +1,5 @@
 "use server";
 
-import { error } from "console";
-import { use } from "react";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { auth, currentUser } from "@clerk/nextjs";
@@ -15,7 +13,7 @@ export const upsertUserProgress = async (courseId: number) => {
   const { userId } = await auth();
   const user = await currentUser();
 
-  if (!userId || !use) {
+  if (!userId || !user) {
     throw new Error("Unauthorized");
   }
 
