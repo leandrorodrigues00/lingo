@@ -9,7 +9,7 @@ export interface ResultCardProps {
 
 export function ResultCard({ value, variant }: ResultCardProps) {
   const imageSrc =
-    variant === "hearts" ? "./icons/heart.svg" : "./icons/points.svg";
+    variant === "hearts" ? "/icons/heart.svg" : "/icons/points.svg";
   return (
     <div
       className={cn(

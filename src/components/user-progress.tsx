@@ -34,7 +34,7 @@ export function UserProgress({
       <Link href="/shop">
         <Button variant="ghost" className="text-orange-500">
           <Image
-            src="./icons/points.svg"
+            src="/icons/points.svg"
             height={28}
             width={28}
             alt="Points"
@@ -47,7 +47,7 @@ export function UserProgress({
       <Link href="/shop">
         <Button variant="ghost" className="text-rose-500">
           <Image
-            src="./icons/heart.svg"
+            src="/icons/heart.svg"
             height={22}
             width={22}
             alt="Hearts"

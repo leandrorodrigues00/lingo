@@ -20,7 +20,7 @@ export function Sidebar({ className }: SidebarProps) {
     >
       <Link href="/learn">
         <div className="flex items-center gap-x-3 pb-7 pl-4 pt-8">
-          <Image src="./icons/mascot.svg" height={40} width={40} alt="Mascot" />
+          <Image src="/icons/mascot.svg" height={40} width={40} alt="Mascot" />
           <h1 className="text-2xl font-extrabold tracking-wide text-green-600">
             Lingo
           </h1>
@@ -28,18 +28,18 @@ export function Sidebar({ className }: SidebarProps) {
       </Link>
 
       <div className="flex flex-1 flex-col gap-y-2">
-        <SidebarItem iconSrc="./icons/learn.svg" label="Learn" href="/learn" />
+        <SidebarItem iconSrc="/icons/learn.svg" label="Learn" href="/learn" />
         <SidebarItem
-          iconSrc="./icons/leaderboard.svg"
+          iconSrc="/icons/leaderboard.svg"
           label="Leaderboard"
           href="/leaderboard"
         />
         <SidebarItem
-          iconSrc="./icons/quests.svg"
+          iconSrc="/icons/quests.svg"
           label="Quests"
           href="/quests"
         />
-        <SidebarItem iconSrc="./icons/shop.svg" label="Shop" href="/shop" />
+        <SidebarItem iconSrc="/icons/shop.svg" label="Shop" href="/shop" />
       </div>
 
       <div className="p-4">

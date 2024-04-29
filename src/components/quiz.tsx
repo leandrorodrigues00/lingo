@@ -4,11 +4,12 @@ import { useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Confetti from "react-confetti";
-import { useAudio, useWindowSize } from "react-use";
+import { useAudio, useMount, useWindowSize } from "react-use";
 import { toast } from "sonner";
 
 import { challengeOptions, challenges } from "@/database/schema";
 import { useHeartsModal } from "@/store/use-hearts-modal";
+import { usePracticeModal } from "@/store/use-practice-modal";
 import { Challenge } from "@/components/challenge";
 import { QuestionBubble } from "@/components/question-bubble";
 import { QuizFooter } from "@/components/quiz-footer";
@@ -35,12 +36,22 @@ export function Quiz({
   userSubscription,
 }: QuizProps) {
   const { open: openHeartsModal } = useHeartsModal();
+  const { open: openPracticesModal } = usePracticeModal();
+
+  useMount(() => {
+    if (initialPercentage === 100) {
+      openPracticesModal();
+    }
+  });
+
   const { height, width } = useWindowSize();
   const router = useRouter();
 
   const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
-  const [percentage, setPercentage] = useState(initialPercentage);
+  const [percentage, setPercentage] = useState(() => {
+    return initialPercentage === 100 ? 0 : initialPercentage;
+  });
   const [challenges] = useState(initialLessonChallenges);
   const [selectedOption, setSelectedOption] = useState<number>();
   const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
@@ -52,14 +63,14 @@ export function Quiz({
     return uncompletedIndex === -1 ? 0 : uncompletedIndex;
   });
 
-  const [finishAudio] = useAudio({ src: "./sound/finish.mp3", autoPlay: true });
+  const [finishAudio] = useAudio({ src: "/sound/finish.mp3", autoPlay: true });
 
   const [correctAudio, _c, correctControls] = useAudio({
-    src: "./sound/correct.wav",
+    src: "/sound/correct.wav",
   });
 
   const [incorrectAudio, _i, incorrectControls] = useAudio({
-    src: "./sound/incorrect.wav",
+    src: "/sound/incorrect.wav",
   });
 
   const currentChallenge = challenges[activeIndex];
@@ -147,7 +158,7 @@ export function Quiz({
         />
         <div className="mx-auto flex h-full max-w-lg flex-col items-center justify-center gap-y-4 text-center lg:gap-y-8">
           <Image
-            src="./icons/finish.svg"
+            src="/icons/finish.svg"
             alt="Finish"
             className="hidden lg:block"
             height={100}

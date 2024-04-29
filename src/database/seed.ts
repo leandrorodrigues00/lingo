@@ -24,22 +24,22 @@ const main = async () => {
       {
         id: 1,
         title: "Spanish",
-        imageSrc: "./icons/es.svg",
+        imageSrc: "/icons/es.svg",
       },
       {
         id: 2,
         title: "Italian",
-        imageSrc: "./icons/it.svg",
+        imageSrc: "/icons/it.svg",
       },
       {
         id: 3,
         title: "French",
-        imageSrc: "./icons/fr.svg",
+        imageSrc: "/icons/fr.svg",
       },
       {
         id: 4,
         title: "Croatian",
-        imageSrc: "./icons/hr.svg",
+        imageSrc: "/icons/hr.svg",
       },
     ]);
 
@@ -113,24 +113,24 @@ const main = async () => {
     await db.insert(schema.challengeOptions).values([
       {
         challengeId: 1, // Which one of these is "the man"?
-        imageSrc: "./icons/man.svg",
+        imageSrc: "/icons/man.svg",
         correct: true,
         text: "el hombre",
-        audioSrc: "./sound/es_man.mp3",
+        audioSrc: "/sound/es_man.mp3",
       },
       {
         challengeId: 1,
-        imageSrc: "./icons/woman.svg",
+        imageSrc: "/icons/woman.svg",
         correct: false,
         text: "la mujer",
-        audioSrc: "./sound/es_woman.mp3",
+        audioSrc: "/sound/es_woman.mp3",
       },
       {
         challengeId: 1,
-        imageSrc: "./icons/robot.svg",
+        imageSrc: "/icons/robot.svg",
         correct: false,
         text: "el robot",
-        audioSrc: "./sound/es_robot.mp3",
+        audioSrc: "/sound/es_robot.mp3",
       },
     ]);
 
@@ -139,43 +139,43 @@ const main = async () => {
         challengeId: 2, // "the man"?
         correct: true,
         text: "el hombre",
-        audioSrc: "./sound/es_man.mp3",
+        audioSrc: "/sound/es_man.mp3",
       },
       {
         challengeId: 2,
         correct: false,
         text: "la mujer",
-        audioSrc: "./sound/es_woman.mp3",
+        audioSrc: "/sound/es_woman.mp3",
       },
       {
         challengeId: 2,
         correct: false,
         text: "el robot",
-        audioSrc: "./sound/es_robot.mp3",
+        audioSrc: "/sound/es_robot.mp3",
       },
     ]);
 
     await db.insert(schema.challengeOptions).values([
       {
         challengeId: 3, // Which one of these is the "the robot"?
-        imageSrc: "./icons/man.svg",
+        imageSrc: "/icons/man.svg",
         correct: false,
         text: "el hombre",
-        audioSrc: "./sound/es_man.mp3",
+        audioSrc: "/sound/es_man.mp3",
       },
       {
         challengeId: 3,
-        imageSrc: "./icons/woman.svg",
+        imageSrc: "/icons/woman.svg",
         correct: false,
         text: "la mujer",
-        audioSrc: "./sound/es_woman.mp3",
+        audioSrc: "/sound/es_woman.mp3",
       },
       {
         challengeId: 3,
-        imageSrc: "./icons/robot.svg",
+        imageSrc: "/icons/robot.svg",
         correct: true,
         text: "el robot",
-        audioSrc: "./sound/es_robot.mp3",
+        audioSrc: "/sound/es_robot.mp3",
       },
     ]);
 
