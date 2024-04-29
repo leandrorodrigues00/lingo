@@ -8,6 +8,7 @@ import { useAudio, useWindowSize } from "react-use";
 import { toast } from "sonner";
 
 import { challengeOptions, challenges } from "@/database/schema";
+import { useHeartsModal } from "@/store/use-hearts-modal";
 import { Challenge } from "@/components/challenge";
 import { QuestionBubble } from "@/components/question-bubble";
 import { QuizFooter } from "@/components/quiz-footer";
@@ -33,6 +34,7 @@ export function Quiz({
   initialLessonChallenges,
   userSubscription,
 }: QuizProps) {
+  const { open: openHeartsModal } = useHeartsModal();
   const { height, width } = useWindowSize();
   const router = useRouter();
 
@@ -98,7 +100,7 @@ export function Quiz({
         upsertChallengeProgress(currentChallenge.id)
           .then((response) => {
             if (response?.error === "hearts") {
-              console.error("Missing hearts");
+              openHeartsModal();
               return;
             }
             correctControls.play();
@@ -117,7 +119,7 @@ export function Quiz({
         reduceHearts(currentChallenge.id)
           .then((response) => {
             if (response?.error === "hearts") {
-              console.error("Missing Hearts");
+              openHeartsModal();
               return;
             }
             incorrectControls.play();
