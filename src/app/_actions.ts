@@ -12,10 +12,10 @@ import {
   getUserSubscription,
 } from "@/database/queries";
 import { challengeProgress, challenges, userProgress } from "@/database/schema";
+import { POINTS_TO_REFILL } from "@/config/docs";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
 
-const POINTS_TO_REFIL = 10;
 const returnUrl = absoluteUrl("/shop");
 
 export const upsertUserProgress = async (courseId: number) => {
@@ -213,7 +213,7 @@ export const refillHearts = async () => {
     throw new Error("Hearts are already full!");
   }
 
-  if (currentUserProgress.points < POINTS_TO_REFIL) {
+  if (currentUserProgress.points < POINTS_TO_REFILL) {
     throw new Error("Not enough points");
   }
 
@@ -221,7 +221,7 @@ export const refillHearts = async () => {
     .update(userProgress)
     .set({
       hearts: 5,
-      points: currentUserProgress.points - POINTS_TO_REFIL,
+      points: currentUserProgress.points - POINTS_TO_REFILL,
     })
     .where(eq(userProgress.userId, currentUserProgress.userId));
 

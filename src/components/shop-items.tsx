@@ -4,10 +4,9 @@ import { useTransition } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
 
+import { POINTS_TO_REFILL } from "@/config/docs";
 import { Button } from "@/components/ui/button";
 import { createStripeUrl, refillHearts } from "@/app/_actions";
-
-const POINTS_TO_REFIL = 10;
 
 interface ShopItemsProps {
   hearts: number;
@@ -23,7 +22,7 @@ export function ShopItems({
   const [pending, startTransition] = useTransition();
 
   const onRefilHearts = () => {
-    if (pending || hearts === 5 || points < POINTS_TO_REFIL) {
+    if (pending || hearts === 5 || points < POINTS_TO_REFILL) {
       return;
     }
 
@@ -55,7 +54,7 @@ export function ShopItems({
         </div>
         <Button
           onClick={onRefilHearts}
-          disabled={pending || hearts === 5 || points < POINTS_TO_REFIL}
+          disabled={pending || hearts === 5 || points < POINTS_TO_REFILL}
         >
           {hearts === 5 ? (
             "full"
@@ -67,7 +66,7 @@ export function ShopItems({
                 height={20}
                 width={20}
               />
-              <p>{POINTS_TO_REFIL}</p>
+              <p>{POINTS_TO_REFILL}</p>
             </div>
           )}
         </Button>
