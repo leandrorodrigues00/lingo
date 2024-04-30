@@ -9,6 +9,8 @@ import db from "@/database/drizzle";
 import { getCourseById, getUserProgress } from "@/database/queries";
 import { challengeProgress, challenges, userProgress } from "@/database/schema";
 
+const POINTS_TO_REFIL = 10;
+
 export const upsertUserProgress = async (courseId: number) => {
   const { userId } = await auth();
   const user = await currentUser();
@@ -187,4 +189,33 @@ export const reduceHearts = async (challengeId: number) => {
   revalidatePath("/quest");
   revalidatePath("/leaderboard");
   revalidatePath(`lesson/${lessonId}`);
+};
+
+export const refillHearts = async () => {
+  const currentUserProgress = await getUserProgress();
+
+  if (!currentUserProgress) {
+    throw new Error("User progress not found");
+  }
+
+  if (currentUserProgress.hearts === 5) {
+    throw new Error("Hearts are already full!");
+  }
+
+  if (currentUserProgress.points < POINTS_TO_REFIL) {
+    throw new Error("Not enough points");
+  }
+
+  await db
+    .update(userProgress)
+    .set({
+      hearts: 5,
+      points: currentUserProgress.points - POINTS_TO_REFIL,
+    })
+    .where(eq(userProgress.userId, currentUserProgress.userId));
+
+  revalidatePath("/shop");
+  revalidatePath("/learn");
+  revalidatePath("/quest");
+  revalidatePath("/leaderboard");
 };
