@@ -1,19 +1,26 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import { getUserProgress } from "@/database/queries";
+import { getUserProgress, getUserSubscription } from "@/database/queries";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { ShopItems } from "@/components/shop-items";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { UserProgress } from "@/components/user-progress";
 
 export default async function ShopPage() {
-  const UserProgressData = getUserProgress();
-  const [userProgress] = await Promise.all([UserProgressData]);
+  const userProgressData = getUserProgress();
+  const userSubscriptionData = getUserSubscription();
+
+  const [userProgress, userSubscription] = await Promise.all([
+    userProgressData,
+    userSubscriptionData,
+  ]);
 
   if (!userProgress || !userProgress.activeCourse) {
     redirect("/courses");
   }
+
+  const isPro = !!userSubscription?.isActive;
 
   return (
     <div className="flex flex-row-reverse gap-[48px] px-6">
@@ -22,7 +29,7 @@ export default async function ShopPage() {
           activeCourse={userProgress.activeCourse}
           hearts={userProgress.hearts}
           points={userProgress.points}
-          hasActiveSubscription={false}
+          hasActiveSubscription={isPro}
         />
       </StickyWrapper>
       <FeedWrapper>
@@ -37,7 +44,7 @@ export default async function ShopPage() {
           <ShopItems
             hearts={userProgress.hearts}
             points={userProgress.points}
-            hasActiveSubscription={false} // TODO: Add subscription
+            hasActiveSubscription={isPro}
           />
         </div>
       </FeedWrapper>

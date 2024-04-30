@@ -5,11 +5,11 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { refillHearts } from "@/app/_actions";
+import { createStripeUrl, refillHearts } from "@/app/_actions";
 
 const POINTS_TO_REFIL = 10;
 
-export interface ShopItemsProps {
+interface ShopItemsProps {
   hearts: number;
   points: number;
   hasActiveSubscription: boolean;
@@ -29,6 +29,18 @@ export function ShopItems({
 
     startTransition(() => {
       refillHearts().catch(() => toast.error("Something went wrong"));
+    });
+  };
+
+  const onUpgrade = () => {
+    startTransition(() => {
+      createStripeUrl()
+        .then((response) => {
+          if (response.data) {
+            window.location.href = response.data;
+          }
+        })
+        .catch(() => toast.error("Something went wrong"));
     });
   };
 
@@ -58,6 +70,23 @@ export function ShopItems({
               <p>{POINTS_TO_REFIL}</p>
             </div>
           )}
+        </Button>
+      </div>
+
+      <div className="flex w-full items-center gap-x-4 border-t-2 p-4 pt-8 ">
+        <Image
+          src="/icons/unlimited.svg"
+          alt="Unlimited"
+          width={60}
+          height={60}
+        />
+        <div className="flex-1">
+          <p className="text-base font-bold text-neutral-700 lg:text-xl">
+            Unlimited hears
+          </p>
+        </div>
+        <Button onClick={onUpgrade} disabled={pending || hasActiveSubscription}>
+          {hasActiveSubscription ? "active" : "upgrade"}
         </Button>
       </div>
     </ul>
