@@ -32,10 +32,9 @@ export const upsertUserProgress = async (courseId: number) => {
     throw new Error("Course not found");
   }
 
-  // TODO: Enable once units and lessons are added
-  // if (!course.units.lenght || !course.units[0].lessons.length) {
-  //   throw new Error("Course is empty");
-  // }
+  if (!course.units.length || !course.units[0].lessons.length) {
+    throw new Error("Course is empty");
+  }
 
   const existingUserProgress = await getUserProgress();
 
@@ -71,7 +70,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
   }
 
   const currentUserProgress = await getUserProgress();
-  // TODO: Handle subscription query later
+  const userSubscription = await getUserSubscription();
 
   if (!currentUserProgress) {
     throw new Error("User progress not found");
@@ -94,8 +93,11 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 
   const isPractice = !!existingChallengeProgress;
 
-  // TODO: Not if user has a subscription
-  if (currentUserProgress.hearts === 0 && !isPractice) {
+  if (
+    currentUserProgress.hearts === 0 &&
+    !isPractice &&
+    !userSubscription?.isActive
+  ) {
     return { error: "hearts" };
   }
 
@@ -151,7 +153,7 @@ export const reduceHearts = async (challengeId: number) => {
   }
 
   const currentUserProgress = await getUserProgress();
-  // TODO: Get user subscription
+  const userSubscription = await getUserSubscription();
 
   const challenge = await db.query.challenges.findFirst({
     where: eq(challenges.id, challengeId),
@@ -178,7 +180,9 @@ export const reduceHearts = async (challengeId: number) => {
     throw new Error("User progress not found");
   }
 
-  //TODO: Handle subscription
+  if (userSubscription?.isActive) {
+    return { error: "subscription" };
+  }
 
   if (currentUserProgress.hearts === 0) {
     return { error: "hearts" };

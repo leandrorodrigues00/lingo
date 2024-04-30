@@ -7,7 +7,11 @@ import Confetti from "react-confetti";
 import { useAudio, useMount, useWindowSize } from "react-use";
 import { toast } from "sonner";
 
-import { challengeOptions, challenges } from "@/database/schema";
+import {
+  challengeOptions,
+  challenges,
+  userSubscription,
+} from "@/database/schema";
 import { useHeartsModal } from "@/store/use-hearts-modal";
 import { usePracticeModal } from "@/store/use-practice-modal";
 import { Challenge } from "@/components/challenge";
@@ -25,7 +29,11 @@ export interface QuizProps {
     completed: boolean;
     challengeOptions: (typeof challengeOptions.$inferSelect)[];
   })[];
-  userSubscription: any;
+  userSubscription:
+    | (typeof userSubscription.$inferSelect & {
+        isActive: boolean;
+      })
+    | null;
 }
 
 export function Quiz({
