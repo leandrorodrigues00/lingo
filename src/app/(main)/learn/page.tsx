@@ -11,6 +11,7 @@ import { FeedHeader } from "@/components/feed-header";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { LessonUnit } from "@/components/lesson-unit";
 import { Promo } from "@/components/promo";
+import { QuestsCard } from "@/components/quests-card";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { UserProgress } from "@/components/user-progress";
 
@@ -55,6 +56,7 @@ export default async function LearnPage() {
           hasActiveSubscription={isPro}
         />
         {!isPro && <Promo />}
+        <QuestsCard points={userProgress.points} />
       </StickyWrapper>
       <FeedWrapper>
         <FeedHeader title={userProgress.activeCourse.title} />

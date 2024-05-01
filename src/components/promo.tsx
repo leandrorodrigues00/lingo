@@ -1,13 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-export interface PromoProps {}
-
-export function Promo(props: PromoProps) {
+export function Promo() {
   return (
     <div className="space-y-4 rounded-xl border-2 p-4">
       <div className="space-y-2">
