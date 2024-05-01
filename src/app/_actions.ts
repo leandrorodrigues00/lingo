@@ -19,7 +19,7 @@ import { absoluteUrl } from "@/lib/utils";
 const returnUrl = absoluteUrl("/shop");
 
 export const upsertUserProgress = async (courseId: number) => {
-  const { userId } = await auth();
+  const { userId } = auth();
   const user = await currentUser();
 
   if (!userId || !user) {
@@ -63,7 +63,7 @@ export const upsertUserProgress = async (courseId: number) => {
 };
 
 export const upsertChallengeProgress = async (challengeId: number) => {
-  const { userId } = await auth();
+  const { userId } = auth();
 
   if (!userId) {
     throw new Error("Unauthorized");
@@ -146,7 +146,7 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 };
 
 export const reduceHearts = async (challengeId: number) => {
-  const { userId } = await auth();
+  const { userId } = auth();
 
   if (!userId) {
     throw new Error("Unauthorized");
@@ -232,7 +232,7 @@ export const refillHearts = async () => {
 };
 
 export const createStripeUrl = async () => {
-  const { userId } = await auth();
+  const { userId } = auth();
   const user = await currentUser();
 
   if (!userId || !user) {
