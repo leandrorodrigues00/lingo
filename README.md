@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lingo - The world's best way to learn a language 🌍
 
-## Getting Started
+<br>
 
-First, run the development server:
+<p align="center">
+  <a href="#-about-the-project">About the project</a> •
+  <a href="#-technologies">Technologies</a> •
+<a href="#-getting-started">Getting started</a> •
+<a href="#-license">License</a>
+
+</p>
+
+<p align="center">
+ 
+ 
+<img alt="project preview" src="./public/site-preview.png" width="75%"   >  
+<img alt="project preview" src="./public/site-preview-2.png" width="75%"   >
+
+</p>
+
+## 👩‍💻 About the project
+
+Lingo is a gamified language learning platform, inspired by the success of Duolingo. Developed using cutting-edge technologies like Next.js, Clerk, Stripe, Drizzle, and more.
+
+With Lingo, you can create profiles for different languages, each featuring its own chapters and challenges. The platform incorporates a Points/XP system and hearts, reflecting users' progress and attempts. Additionally, it boasts a leaderboard for friendly competitions and an integrated store system powered by Stripe. This allows users to purchase hearts or upgrade to PRO plans, offering exclusive benefits.
+
+Prepare to immerse yourself in a captivating language learning journey with Lingo!
+
+[click here, see closer](https://lingo-cs.vercel.app/) 😉
+
+## 🚀 Technologies
+
+- [AI Voices with Elevenlabs AI](https://elevenlabs.io/)
+- [Assets/mascot from kenney](https://kenney.nl/)
+- [Clerk auth](https://clerk.com/)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Neon](https://neon.tech/)
+- [NextJs 14+](https://nextjs.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Shadcn/UI](https://ui.shadcn.com/)
+- [Stripe](https://stripe.com/br)
+- [Tailwind Css](https://tailwindcss.com/)
+- [Zod](https://github.com/colinhacks/zod)
+- [Zustand](https://zustand-demo.pmnd.rs/)
+
+## 💻 Getting started
+
+### Requirements
+
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://classic.yarnpkg.com/) or [PNPM](https://pnpm.io/) _(examples are with PNPM)_
+
+**Clone the project and access the folder**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone https://github.com/leandrorodrigues00/lingo && cd lingo
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Follow the steps below**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Install the dependencies
+$ pnpm i
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Make a copy of '.env.example' to '.env'
+# and set with YOUR environment variables.
+$ cp .env.example .env
 
-## Learn More
+# Start the app
+$ pnpm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<p align="center">
+  Made with 💜&nbsp; by  Leandro Rodrigues
+</p>
