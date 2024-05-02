@@ -12,9 +12,9 @@
 
 <p align="center">
  
- 
-<img alt="project preview" src="./public/site-preview.png" width="75%"   >  
-<img alt="project preview" src="./public/site-preview-2.png" width="75%"   >
+ <kbd>
+<img alt="project preview" src="./public/site-preview.png" width="75%"   >  </kbd> 
+ <kbd><img alt="project preview" src="./public/site-preview-2.png" width="75%"   ></kbd> 
 
 </p>
 
