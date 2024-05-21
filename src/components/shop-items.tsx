@@ -81,7 +81,7 @@ export function ShopItems({
         />
         <div className="flex-1">
           <p className="text-base font-bold text-neutral-700 lg:text-xl">
-            Unlimited hears
+            Unlimited hearts
           </p>
         </div>
         <Button onClick={onUpgrade} disabled={pending}>

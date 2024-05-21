@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  auth,
   ClerkLoaded,
   ClerkLoading,
   SignedIn,
@@ -11,8 +12,11 @@ import {
 import { Loader } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import TestSignIn from "@/components/test-sign-in";
 
 export default function Home() {
+  const { userId } = auth();
+
   return (
     <div className="mx-auto flex w-full max-w-[988px] flex-1 flex-col items-center justify-center gap-2 p-4 lg:flex-row">
       <div className="relative mb-8 h-[240px] w-[240px] lg:mb-0 lg:h-[424px] lg:w-[424px]">
@@ -55,6 +59,7 @@ export default function Home() {
             </SignedIn>
           </ClerkLoaded>
         </div>
+        {!userId && <TestSignIn />}
       </div>
     </div>
   );
